@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require_once($_SERVER['DOCUMENT_ROOT'] . "/core/config.php");
+require_once("core/config.php");
 
 $query = "DELETE FROM assignments WHERE assignments.assignment_id = " . $_GET["id"];
 

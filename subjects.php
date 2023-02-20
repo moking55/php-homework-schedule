@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . "/views/components/header.php");
+require_once("views/components/header.php");
 if ($_SESSION['is_login'] != true || !isset($_SESSION['is_login'])) {
     return header("Location: /login.php");
 }
@@ -8,7 +8,7 @@ $query = "SELECT * FROM subject";
 $getClassInfo = mysqli_query($dbl, $query);
 ?>
 <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
-    <?php include $_SERVER['DOCUMENT_ROOT'] . '/views/components/sidebar.php'; ?>
+    <?php include 'views/components/sidebar.php'; ?>
     <div class="page-wrapper">
         <?php
         if (isset($_GET['edit'])) :
@@ -65,5 +65,5 @@ $getClassInfo = mysqli_query($dbl, $query);
 if (isset($_SESSION['flash_message'])) {
     unset($_SESSION['flash_message']);
 }
-require_once($_SERVER['DOCUMENT_ROOT'] . "./views/components/footer.php");
+require_once("views/components/footer.php");
 ?>

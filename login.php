@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . "/views/components/header.php");
+require_once("views/components/header.php");
 if (isset($_SESSION['is_login']) && $_SESSION['is_login'] === true) {
     return header('location: /');
 }
@@ -60,4 +60,4 @@ if (isset($_GET['action']) && $_GET['action'] == 'chk_login') {
 </div>
 <?php
 unset($_SESSION['error_message']);
-require_once($_SERVER['DOCUMENT_ROOT'] . "./views/components/footer.php"); ?>
+require_once("views/components/footer.php"); ?>

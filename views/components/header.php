@@ -1,6 +1,6 @@
 <?php
 session_start();
-include $_SERVER['DOCUMENT_ROOT'] . "/core/config.php";
+include "core/config.php";
 if (!empty($_GET['logout'])) {
     session_destroy();
 };

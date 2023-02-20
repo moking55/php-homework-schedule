@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once($_SERVER['DOCUMENT_ROOT'] . "/core/config.php");
+require_once("core/config.php");
 
 function sendWebhook($dueDate, $score, $title, $shareID)
 {
@@ -68,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                         // Setup our new file path. 
                         // You can change this to any filename or directory you want. 
-                        $newFilePath = $_SERVER['DOCUMENT_ROOT'] . "uploads/" . $files['name'][$key];
+                        $newFilePath = "uploads/" . $files['name'][$key];
 
                         // Upload the file into the temp dir.
                         if (move_uploaded_file($tmpFilePath, $newFilePath)) {

@@ -1,5 +1,5 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . "/core/config.php";
+include "core/config.php";
 
 $query = "SELECT
 	attachments.file_name, 
@@ -94,4 +94,4 @@ $getFiles = mysqli_query($dbl, $query);
             </div>
         </div>
     </div>
-    <?php require_once($_SERVER['DOCUMENT_ROOT'] . "./views/components/footer.php"); ?>
+    <?php require_once("views/components/footer.php"); ?>
