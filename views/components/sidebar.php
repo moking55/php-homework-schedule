@@ -61,6 +61,10 @@
                         <i class="mdi me-2 mdi-calendar"></i><span class="hide-menu">ตารางเรียน</span></a>
                 </li>
                 <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="subjects.php" aria-expanded="false">
+                        <i class="mdi me-2 mdi-table"></i><span class="hide-menu">รายวิชาทั้งหมด</span></a>
+                </li>
+                <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="files.php" aria-expanded="false"><i class="mdi me-2 mdi-folder"></i><span class="hide-menu">ไฟล์</span></a>
                 </li>
             </ul>
@@ -71,11 +75,7 @@
     <!-- End Sidebar scroll-->
     <div class="sidebar-footer">
         <div class="row">
-            <div class="col-6 link-wrap">
-                <!-- item-->
-                <a href="" class="link" data-toggle="tooltip" title="asd" data-original-title="Settings"><i class="ti-settings"></i></a>
-            </div>
-            <div class="col-6 link-wrap">
+            <div class="col-12 link-wrap">
                 <!-- item-->
                 <a onclick="javascript: if (confirm('ต้องการออกจากระบบ?')) {location.replace('/login.php?logout=true')};" class="link text-danger" data-toggle="tooltip" title="ออกจากระบบ" data-original-title="Logout"><i class="mdi mdi-power"></i></a>
             </div>
