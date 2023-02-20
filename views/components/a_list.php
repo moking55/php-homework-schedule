@@ -1,13 +1,32 @@
 <?php
-function getAssignments($isSubmitted) {
+function getAssignments($isSubmitted)
+{
     global $dbl;
-    $query = "SELECT `subject`.subject_name, assignments.assignment_id, assignments.title, assignments.due_date FROM assignments
-    INNER JOIN `subject` ON assignments.`subject` = `subject`.subject_id";
-    if($isSubmitted) {
-        $query .= " WHERE is_submitted = 1";
+    $query = "SELECT
+	`subject`.subject_name, 
+	assignments.assignment_id, 
+	assignments.title, 
+	assignments.due_date
+FROM
+	assignments
+	LEFT JOIN
+	submitted
+	ON 
+		assignments.assignment_id = submitted.assignment_id
+	INNER JOIN
+	`subject`
+	ON 
+		assignments.`subject` = `subject`.subject_id
+        INNER JOIN users
+WHERE
+    users.uid = " . $_SESSION['uid'] . " AND
+	submitted.submit_id IS ";
+    if ($isSubmitted) {
+        $query .= "NOT NULL";
     } else {
-        $query .= " WHERE is_submitted = 0";
+        $query .= "NULL";
     }
+    $query .= " ORDER BY assignments.due_date ASC";
     $myAssignments = mysqli_query($dbl, $query);
     return $myAssignments;
 }
@@ -22,8 +41,8 @@ $unsubmitted = getAssignments(false);
             <div class="d-flex align-items-center">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Assignments</li>
+                        <li class="breadcrumb-item"><a href="/">หน้าแรก</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">งานที่มอบหมาย</li>
                     </ol>
                 </nav>
             </div>
@@ -60,7 +79,7 @@ $unsubmitted = getAssignments(false);
                                 <a href="/assignments.php?info=<?= $assignment['assignment_id'] ?>" class="list-group-item list-group-item-action flex-column align-items-start">
                                     <div class="d-flex w-100 justify-content-between">
                                         <h5 class="mb-1"><?= $assignment['title'] ?></h5>
-                                        <small style="font-size: 10pt" class="<?= (strtotime($assignment['due_date']) > time())? "text-muted" : "text-danger"?>"><?= $assignment['due_date'] ?></small>
+                                        <small style="font-size: 10pt" class="<?= (strtotime($assignment['due_date']) > time()) ? "text-muted" : "text-danger" ?>"><?= $assignment['due_date'] ?></small>
                                     </div>
                                     <small class="text-muted"><?= $assignment['subject_name'] ?></small>
                                 </a>

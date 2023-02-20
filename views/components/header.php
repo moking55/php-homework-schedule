@@ -22,6 +22,12 @@ if (!empty($_GET['logout'])) {
     <!-- Custom CSS -->
     <link href="//<?= $_SERVER['SERVER_NAME'] ?>/assets/css/animate.min.css" rel="stylesheet">
     <link href="//<?= $_SERVER['SERVER_NAME'] ?>/assets/css/style.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@200;300;400;500&display=swap');
+        body {
+            font-family: 'Noto Sans Thai', sans-serif;
+        }
+    </style>
 </head>
 
 <body>

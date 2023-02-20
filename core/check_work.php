@@ -3,9 +3,14 @@
 session_start();
 require_once($_SERVER['DOCUMENT_ROOT'] . "/core/config.php");
 
-$query = "UPDATE assignments SET is_submitted = ";
-$query .= ($_GET["is_submitted"] == 'true')? "1" : "0";
-$query .= " WHERE assignments.assignment_id = " . $_GET["info"];
+$isFinished = $_GET['is_submitted'];
+$info = $_GET["info"];
+if ($isFinished == "true") {
+    $query = "INSERT INTO submitted (user_id, assignment_id) VALUES (" . $_SESSION['uid'] . ",$info)";
+} else {
+    $query = "DELETE FROM submitted WHERE user_id = ".$_SESSION['uid']." AND assignment_id = '$info'";
+}
 
 $res = mysqli_query($dbl, $query);
+//var_dump(mysqli_error($dbl));
 header("location: /assignments.php?info=" . $_GET["info"]);

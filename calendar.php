@@ -14,8 +14,8 @@ if ($_SESSION['is_login'] != true || !isset($_SESSION['is_login'])) {
           <div class="d-flex align-items-center">
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Calendar</li>
+                <li class="breadcrumb-item"><a href="/">หน้าแรก</a></li>
+                <li class="breadcrumb-item active" aria-current="page">ตารางเรียน</li>
               </ol>
             </nav>
           </div>

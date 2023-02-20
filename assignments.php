@@ -15,7 +15,7 @@ if (empty($_SESSION['is_login'])) {
         if (!empty($_GET['info'])) {
             include $_SERVER['DOCUMENT_ROOT'] . "/views/components/a_info.php";
         } else if (!empty($_GET['edit'])) {
-            echo "edit";
+            include $_SERVER['DOCUMENT_ROOT'] . "/views/components/a_edit.php";
         } else if (!empty($_GET['add'])) {
             switch ($_GET['add']) {
                 case 'work':

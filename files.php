@@ -4,7 +4,7 @@ if ($_SESSION['is_login'] != true || !isset($_SESSION['is_login'])) {
     return header("Location: /login.php");
 }
 
-$query = "SELECT * FROM attachments";
+$query = "SELECT * FROM attachments WHERE user_id = " . $_SESSION['uid'];
 $getFiles = mysqli_query($dbl, $query);
 ?>
 <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
@@ -17,8 +17,8 @@ $getFiles = mysqli_query($dbl, $query);
                     <div class="d-flex align-items-center">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="/">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Files</li>
+                                <li class="breadcrumb-item"><a href="/">หน้าแรก</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">ไฟล์</li>
                             </ol>
                         </nav>
                     </div>
@@ -30,16 +30,13 @@ $getFiles = mysqli_query($dbl, $query);
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-2">
-                                <button class="mt-2 btn btn-primary w-100"><i style="font-size: 20px" class="mdi mdi-upload"></i> อัพโหลดไฟล์</button>
-                            </div>
-                            <div class="col-md-10">
+                            <div class="col-md-12">
                                 <h4 class="mt-3">ไฟล์ทั้งหมด</h4>
                                 <hr>
                                 <ul class="list-group list-group-flush">
-                                    <?php foreach ($getFiles as $file) : ?>
+                                    <?php while ($file = mysqli_fetch_array($getFiles)) : ?>
                                         <li class="list-group-item"><a href="#" download="<?= $file['file_url'] ?>"><i class="mdi mdi-file"></i> <?= $file['file_name'] ?></a></li>
-                                    <?php endforeach; ?>
+                                    <?php endwhile; ?>
                                 </ul>
                             </div>
                         </div>

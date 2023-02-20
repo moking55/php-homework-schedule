@@ -1,24 +1,23 @@
 <?php
 
 $query = "SELECT
-	attachments.file_name, 
-	attachments.file_url, 
-	assignments.*, 
-	`subject`.subject_name, 
-	`subject`.instructor_name, 
-	`subject`.subject_code
+count(*) AS is_submitted, 
+assignments.*, 
+`subject`.subject_name,
+`subject`.instructor_name
 FROM
-	assignments
-	LEFT JOIN
-	attachments
-	ON 
-		assignments.assignment_id = attachments.assignment_id
-	LEFT JOIN
-	`subject`
-	ON 
-		assignments.`subject` = `subject`.subject_id
+assignments
+INNER JOIN
+submitted
+ON 
+    assignments.assignment_id = submitted.assignment_id
+INNER JOIN
+`subject`
+ON 
+    assignments.`subject` = `subject`.subject_id
 WHERE
-	assignments.assignment_id = " . $_GET["info"];
+submitted.user_id = " . $_SESSION['uid'] . " AND
+submitted.assignment_id = " . $_GET["info"];
 
 $classInformation = mysqli_query($dbl, $query);
 $classInformation = mysqli_fetch_array($classInformation);
@@ -76,6 +75,7 @@ $getFiles = mysqli_query($dbl, $query);
                             <a class="btn btn-outline-success" href="/core/check_work.php?info=<?= $_GET['info'] ?>&is_submitted=true" type="button">ทำเครื่องหมายว่าส่งแล้ว</a>
                             <!-- <button class="btn btn-outline-warning" type="button">แก้ไขงาน</button> -->
                         <?php endif ?>
+                        <a href="/assignments.php?edit=<?= $_GET['info'] ?>" class="btn btn-outline-warning">แก้ไขงาน</a>
                         <button onclick="if(confirm('แน่ใจหรือไม่ว่าจะลบงานนี้?')) {location.replace('/core/del_work.php?id=<?= $_GET['info'] ?>')}" class="btn btn-outline-danger" type="button">ลบงาน</button>
                         <button class="btn btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">แชร์ให้เพื่อน</button>
                     </div>
@@ -88,7 +88,7 @@ $getFiles = mysqli_query($dbl, $query);
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <p>คัดลองลิ้งนี้และส่งไปให้เพื่อน</p>
+                                <p>คัดลอกลิ้งนี้และส่งไปให้เพื่อน</p>
                                 <?= (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" ?>
                             </div>
                             <div class="modal-footer">

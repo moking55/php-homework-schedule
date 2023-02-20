@@ -6,11 +6,17 @@ if ($_SESSION['is_login'] != true || !isset($_SESSION['is_login'])) {
 
 // Get the current submission
 $query = "SELECT
-SUM(is_submitted=1) AS submitted,
-SUM(is_submitted=0) AS unsubmit,
-count(is_submitted) AS `all`
+(
+SELECT
+    COUNT( * ) 
 FROM
-assignments";
+    assignments
+    LEFT JOIN submitted ON assignments.assignment_id = submitted.assignment_id 
+WHERE
+    submitted.submit_id <> '' 
+AND submitted.user_id = " . $_SESSION['uid'] . "
+) AS `submitted`,
+(SELECT COUNT(*) FROM assignments) as `total`";
 
 $total = mysqli_fetch_array(mysqli_query($dbl, $query));
 
@@ -40,8 +46,8 @@ $activity = mysqli_query($dbl, $query);
                     <div class="d-flex align-items-center">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="/">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                                <li class="breadcrumb-item"><a href="/">หน้าแรก</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">สรุปผล</li>
                             </ol>
                         </nav>
                     </div>
@@ -57,7 +63,7 @@ $activity = mysqli_query($dbl, $query);
                                 <div class="col-3 px-2"><i style="font-size: 50px" class="m-0 mdi mdi-file-outline"></i></div>
                                 <div class="col-auto text-left">
                                     <h3>ยังไม่ได้ส่ง</h3>
-                                    <h1 class="m-0" id="unsubmit" data-unsubmit="<?= $total['unsubmit'] ?>"><?= $total['unsubmit'] ?></h1>
+                                    <h1 class="m-0" id="unsubmit" data-unsubmit="<?= $total['total'] - $total['submitted'] ?>"><?= $total['total'] - $total['submitted'] ?></h1>
                                 </div>
                             </div>
                         </div>
@@ -83,7 +89,7 @@ $activity = mysqli_query($dbl, $query);
                                 <div class="col-3 px-2"><i style="font-size: 50px" class="m-0 mdi mdi-book"></i></div>
                                 <div class="col-auto text-left">
                                     <h3>รวมทั้งหมด</h3>
-                                    <h1 class="m-0"><?= $total['all'] ?></h1>
+                                    <h1 class="m-0"><?= $total['total'] ?></h1>
                                 </div>
                             </div>
                         </div>
@@ -108,16 +114,16 @@ $activity = mysqli_query($dbl, $query);
                             </div>
                             <div class="profiletimeline border-start-0">
                                 <?php while ($item = mysqli_fetch_array($activity)) : ?>
-                                <div class="sl-item">
-                                    <div class="sl-left"> <img src="assets/images/users/backpack.png" alt="user" class="img-circle"> </div>
-                                    <div class="sl-right">
-                                        <div><a href="#" class="link">Assignments</a> <small class="badge bg-primary">Bot</small>
-                                            <blockquote class="mt-2">
-                                                เพิ่มงาน <i class="mdi mdi-arrow-right-bold"></i> <a href=""><?= $item['title'] ?></a> วิชา <a href=""><?= $item['subject_name'] ?></a>
-                                            </blockquote>
+                                    <div class="sl-item">
+                                        <div class="sl-left"> <img src="assets/images/users/backpack.png" alt="user" class="img-circle"> </div>
+                                        <div class="sl-right">
+                                            <div><a href="#" class="link">Assignments</a> <small class="badge bg-primary">Bot</small>
+                                                <blockquote class="mt-2">
+                                                    เพิ่มงาน <i class="mdi mdi-arrow-right-bold"></i> <a href=""><?= $item['title'] ?></a> วิชา <a href=""><?= $item['subject_name'] ?></a>
+                                                </blockquote>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
                                 <?php endwhile ?>
                             </div>
                         </div>

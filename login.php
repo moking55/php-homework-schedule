@@ -4,7 +4,15 @@ if (isset($_SESSION['is_login']) && $_SESSION['is_login'] === true) {
     return header('location: /');
 }
 if (isset($_GET['action']) && $_GET['action'] == 'chk_login') {
-    if ($_POST['username'] == ADMIN_USERNAME && $_POST['password'] == ADMIN_PASSWORD) {
+    $queryParams = array(
+        "username" => $_POST['username'],
+        "password" => $_POST['password'],
+    );
+    $query = "SELECT `password`,`uid` FROM `users` WHERE `username` LIKE '".$queryParams['username']."'";
+    $result = mysqli_fetch_array(mysqli_query($dbl, $query));
+    var_dump($result['password']);
+    if (isset($result['password']) && password_verify($queryParams['password'], $result['password'])) {
+        $_SESSION['uid'] = $result['uid'];
         $_SESSION['is_login'] = true;
         return header("location: /");
     } else {
@@ -32,15 +40,16 @@ if (isset($_GET['action']) && $_GET['action'] == 'chk_login') {
                     <h3 class="text-center my-4">เข้าสู่ระบบ</h3>
                     <form action="?action=chk_login" method="post">
                         <div class="form-group">
-                            <label for="username">Username:</label>
-                            <input type="text" class="form-control" name="username" placeholder="Enter username" required />
+                            <label for="username">ชื่อผู้ใช้:</label>
+                            <input type="text" class="form-control" name="username" placeholder="ชื่อผู้ใช้" required />
                         </div>
                         <div class="form-group">
-                            <label for="password">Password:</label>
-                            <input type="password" class="form-control" name="password" placeholder="Enter password" required />
+                            <label for="password">รหัสผ่าน:</label>
+                            <input type="password" class="form-control" name="password" placeholder="รหัสผ่าน" required />
                         </div>
+                        <p>ยังไม่มีบัญชี? <a href="/register.php">สมัครสมาชิก</a></p>
                         <div class="text-center">
-                            <button type="submit" class="btn btn-default">Submit</button>
+                            <button type="submit" class="btn btn-default">เข้าสู่ระบบ</button>
                         </div>
                     </form>
                 </div>

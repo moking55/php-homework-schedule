@@ -51,17 +51,17 @@
             <ul id="sidebarnav">
                 <!-- User Profile-->
                 <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/" aria-expanded="false"><i class="mdi me-2 mdi-gauge"></i><span class="hide-menu">Home</span></a>
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/" aria-expanded="false"><i class="mdi me-2 mdi-gauge"></i><span class="hide-menu">สรุปผล</span></a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="assignments.php" aria-expanded="false"><i class="mdi me-2 mdi-clipboard-text"></i><span class="hide-menu">Assignments</span></a>
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="assignments.php" aria-expanded="false"><i class="mdi me-2 mdi-clipboard-text"></i><span class="hide-menu">งานที่มอบหมาย</span></a>
                 </li>
                 <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="calendar.php" aria-expanded="false">
-                        <i class="mdi me-2 mdi-calendar"></i><span class="hide-menu">Calendar</span></a>
+                        <i class="mdi me-2 mdi-calendar"></i><span class="hide-menu">ตารางเรียน</span></a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="files.php" aria-expanded="false"><i class="mdi me-2 mdi-folder"></i><span class="hide-menu">Files</span></a>
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="files.php" aria-expanded="false"><i class="mdi me-2 mdi-folder"></i><span class="hide-menu">ไฟล์</span></a>
                 </li>
             </ul>
 
