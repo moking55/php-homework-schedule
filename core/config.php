@@ -10,10 +10,10 @@ define("ADMIN_USERNAME", "admin");
 define("ADMIN_PASSWORD", "admin");
 
 /* ฐานข้อมูล */
-define('DB_HOST', "sql305.epizy.com");
-define('DB_USERNAME', "epiz_33633754");
-define('DB_PASSWORD', "D5xOqbqy4i");
-define('DB_NAME', "epiz_33633754_homework");
+define('DB_HOST', "sql110.epizy.com");
+define('DB_USERNAME', "epiz_32897036");
+define('DB_PASSWORD', "ZHnhhAv4C8JDWy");
+define('DB_NAME', "epiz_32897036_homework");
 // Create connection
 $dbl = mysqli_connect(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_NAME);
 // Check connection
