@@ -12,6 +12,6 @@ jobs:
       uses: SamKirkland/FTP-Deploy-Action@4.3.3
       with:
         server: ftpupload.net
-        username: epiz_33633754
+        username: epiz_32897036
         password: ${{ secrets.ftp_password }}
-        server-dir: htdocs/
+        server-dir: htdocs/project
